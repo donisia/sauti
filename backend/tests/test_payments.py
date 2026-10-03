@@ -2,7 +2,7 @@ import math
 
 from .conftest import READER
 
-SALT_AUTHOR = "npub1q8m4a7tzk3wv9hf2ljd6xye0cr5ns8g4u3pa7mk2qzv9thw6fx0dlsa3ce"  # Amara Nwosu
+SALT_AUTHOR = "npub1q8m4a7tzk3wv9hf2ljd6xye0cr5ns8g4u3pa7mk2qzv9thw6fx0dlsa3ce"  # Binti Jua
 
 
 def _invoice(client, headers, **body):

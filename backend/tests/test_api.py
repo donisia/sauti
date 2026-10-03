@@ -8,12 +8,14 @@ def test_health(client):
 
 def test_list_and_filter_books(client):
     all_books = client.get("/api/books").get_json()
-    assert len(all_books["books"]) == 20
-    assert all_books["categoryCounts"]["Fiction"] == 3
+    assert len(all_books["books"]) == 25
+    assert all_books["categoryCounts"]["Fiction"] == 8
     assert all_books["categoryCounts"]["Feminism"] == 7
 
     covered = {b["id"]: b["coverUrl"] for b in all_books["books"] if b["coverUrl"]}
-    assert covered["burgers-daughter"] == "/covers/burgers-daughter.png" and len(covered) == 5
+    assert covered["burgers-daughter"] == "/covers/burgers-daughter.png"
+    assert covered["things-fall-apart"] == "/covers/things-fall-apart.jpg"
+    assert len(covered) == 10
 
     poetry = client.get("/api/books?category=Poetry").get_json()["books"]
     assert [b["id"] for b in poetry] == ["small-hours"]
@@ -21,7 +23,7 @@ def test_list_and_filter_books(client):
     by_tag = client.get("/api/books?q=lisbon").get_json()["books"]
     assert [b["id"] for b in by_tag] == ["cartographers-of-ash"]
 
-    by_author = client.get("/api/books?q=kwame").get_json()["books"]
+    by_author = client.get("/api/books?q=mwandishi").get_json()["books"]
     assert {b["id"] for b in by_author} == {"the-quiet-republic", "protocols-of-trust"}
 
 

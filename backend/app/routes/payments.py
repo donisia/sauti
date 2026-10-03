@@ -152,7 +152,7 @@ def create_invoice():
             )
         amount_kes = sats_to_kes(purchase["amount_sats"])
         try:
-            pushed = _mpesa().stk_push(amount_kes, phone, reference, "Sovereign Pub")
+            pushed = _mpesa().stk_push(amount_kes, phone, reference, "Sauti")
         except MpesaError as error:
             raise ApiError(str(error), 502, "mpesa_failed")
         invoice = Invoice(

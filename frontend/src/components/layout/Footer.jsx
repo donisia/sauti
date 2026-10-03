@@ -37,8 +37,8 @@ export default function Footer() {
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream-muted">
-            A decentralized home for independent authors. Identity on Nostr, payments over Lightning, and
-            nobody in between.
+            A home for independent voices. Write under any name, keep the rights to every word, and get
+            paid directly — M-Pesa or Lightning.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             <span className="badge-nostr">
@@ -70,8 +70,8 @@ export default function Footer() {
 
       <div className="border-t border-line/60">
         <div className="container-wide flex flex-col gap-2 py-6 text-xs text-cream-faint sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Sovereign Publishing · Hackathon demo build</p>
-          <p className="font-mono">Signed with Nostr · Settled in sats</p>
+          <p>© {new Date().getFullYear()} Sauti · Your voice. Your story. Your freedom.</p>
+          <p className="font-mono">Signed with Nostr · Paid in sats or shillings</p>
         </div>
       </div>
     </footer>

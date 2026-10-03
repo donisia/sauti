@@ -2,12 +2,12 @@
   "authors": [
     {
       "npub": "npub1q8m4a7tzk3wv9hf2ljd6xye0cr5ns8g4u3pa7mk2qzv9thw6fx0dlsa3ce",
-      "name": "Amara Nwosu",
-      "initials": "AN",
-      "location": "Lagos, Nigeria",
+      "name": "Binti Jua",
+      "initials": "BJ",
+      "location": "West Africa",
       "lightningAddress": "amara@getalby.com",
       "joined": "2025-11-02",
-      "bio": "Novelist and essayist writing about trade routes, inheritance, and the women who keep families moving. Formerly a newspaper columnist; now publishing directly to readers, one signed chapter at a time.",
+      "bio": "Novelist and essayist writing about trade routes, inheritance, and the women who keep families moving. Formerly a newspaper columnist; now publishing directly to readers, one signed chapter at a time. Publishes under a pen name.",
       "avatarHue": 24,
       "stats": {
         "paidReaders": 1284,
@@ -25,12 +25,12 @@
     },
     {
       "npub": "npub1t9h4ls2xw8e6rcq0pzv3dk7mfu5na4gy2j8x6wq9cte3rl0hk5v7smd2f",
-      "name": "Tomás Ilyin",
-      "initials": "TI",
-      "location": "Lisbon, Portugal",
+      "name": "Kalamu Nyeusi",
+      "initials": "KN",
+      "location": "Southern Europe",
       "lightningAddress": "tomas@walletofsatoshi.com",
       "joined": "2025-09-18",
-      "bio": "Economic historian interested in how empires keep their books — and how those books are cooked. Writes slowly, footnotes generously.",
+      "bio": "Economic historian interested in how empires keep their books — and how those books are cooked. Writes slowly, footnotes generously. Publishes under a pen name.",
       "avatarHue": 205,
       "stats": {
         "paidReaders": 862,
@@ -48,12 +48,12 @@
     },
     {
       "npub": "npub1k5v2xq7dme9wz0n4hcl8u3ta6ry2fs9pj7gk4e0dqx5mw3vhn8zlc2r6t",
-      "name": "Lena Varga",
-      "initials": "LV",
-      "location": "Budapest, Hungary",
+      "name": "Ndoto Usiku",
+      "initials": "NU",
+      "location": "Central Europe",
       "lightningAddress": "lena@stacker.news",
       "joined": "2026-01-07",
-      "bio": "Poet and translator. Two collections in print, a third written entirely on night trains. Believes a poem should cost less than a coffee and last longer.",
+      "bio": "Poet and translator. Two collections in print, a third written entirely on night trains. Believes a poem should cost less than a coffee and last longer. Publishes under a pen name.",
       "avatarHue": 330,
       "stats": {
         "paidReaders": 517,
@@ -71,12 +71,12 @@
     },
     {
       "npub": "npub1z3w8rq5tjx2ke7dh9na0vm4cl6ys8fu3pg2t7wq0x4kre9dmh5jn6c8vz",
-      "name": "Kwame Asante",
-      "initials": "KA",
-      "location": "Accra, Ghana",
+      "name": "Mwandishi Huru",
+      "initials": "MH",
+      "location": "West Africa",
       "lightningAddress": "kwame@primal.net",
       "joined": "2025-08-23",
-      "bio": "Writer and former civic-tech engineer. Essays on institutions, open protocols, and the long argument between convenience and freedom.",
+      "bio": "Writer and former civic-tech engineer. Essays on institutions, open protocols, and the long argument between convenience and freedom. Publishes under a pen name.",
       "avatarHue": 150,
       "stats": {
         "paidReaders": 1930,
@@ -408,7 +408,7 @@
         "institutions",
         "civic life"
       ],
-      "description": "Most of what keeps a society free is boring: registries, audits, open meetings, the right to a copy of the record. Kwame Asante argues that the quiet machinery of accountability matters more than any election — and shows how it is being dismantled one convenience at a time.",
+      "description": "Most of what keeps a society free is boring: registries, audits, open meetings, the right to a copy of the record. Mwandishi Huru argues that the quiet machinery of accountability matters more than any election — and shows how it is being dismantled one convenience at a time.",
       "cover": {
         "from": "#16302A",
         "to": "#08110F",

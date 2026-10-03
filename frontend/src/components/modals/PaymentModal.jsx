@@ -243,7 +243,7 @@ function MpesaBody({ payment, amountKes, remaining, isExpired, onRetry }) {
       <p className="mt-4 font-display text-2xl text-cream">Check your phone</p>
       <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-cream-muted">
         Enter your M-Pesa PIN on <span className="font-mono text-cream">{invoice?.phone}</span> to pay{' '}
-        <span className="text-cream">{formatKes(invoice?.amountKes)}</span> to Sovereign Publishing.
+        <span className="text-cream">{formatKes(invoice?.amountKes)}</span> to Sauti.
       </p>
       <p className="mt-4 flex items-center justify-center gap-2 text-xs text-cream-faint">
         <Loader2 className="h-3.5 w-3.5 animate-spin text-emerald-300" />

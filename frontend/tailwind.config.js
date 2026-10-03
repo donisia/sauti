@@ -58,6 +58,10 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-8px)' },
         },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 200ms ease-out both',
@@ -66,6 +70,7 @@ export default {
         'slide-in': 'slide-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both',
         shrink: 'shrink linear forwards',
         float: 'float 6s ease-in-out infinite',
+        marquee: 'marquee 40s linear infinite',
       },
     },
   },

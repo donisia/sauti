@@ -426,7 +426,7 @@ export default function AuthorDashboardPage() {
               <div className="flex gap-3 rounded-xl border border-violet-400/20 bg-violet-400/[0.05] p-4">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-violet-300" />
                 <p className="text-sm leading-relaxed text-cream-muted">
-                  <span className="font-medium text-cream">Never share your nsec.</span> Sovereign Publishing will never ask for
+                  <span className="font-medium text-cream">Never share your nsec.</span> Sauti will never ask for
                   your private key. Anyone requesting it — in a form, a DM, or a "support" chat — is trying to steal your identity.
                 </p>
               </div>

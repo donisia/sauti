@@ -103,7 +103,7 @@ export default function CreateChapterPage() {
             ['chapter', String(form.number)],
             ['access', isPaid ? 'paid' : 'free'],
             ...(isPaid ? [['price', String(form.priceSats), 'sats']] : []),
-            ['L', 'sovereign-publishing'],
+            ['L', 'sauti'],
           ],
         });
         flash.info(`${isSimulated ? 'Simulated broadcast' : 'Broadcast'} to ${accepted} relays.`, { title: 'Chapter metadata signed' });

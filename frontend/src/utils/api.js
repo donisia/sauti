@@ -51,7 +51,7 @@ export async function apiRequest(path, { method = 'GET', body, headers = {}, sig
     });
   } catch (error) {
     if (error.name === 'AbortError') throw error;
-    throw new ApiError('Can’t reach the Sovereign Publishing server. Is the backend running?');
+    throw new ApiError('Can’t reach the Sauti server. Is the backend running?');
   }
 
   const data = await response.json().catch(() => null);

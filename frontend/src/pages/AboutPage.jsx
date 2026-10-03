@@ -54,8 +54,8 @@ export default function AboutPage() {
             Writers should not need permission <span className="italic text-btc">to be read.</span>
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-serif text-xl leading-relaxed text-cream-muted">
-            Sovereign Publishing is an experiment in giving authors the two things platforms have always rented back to
-            them: their identity and their income.
+            Sauti means “voice” in Swahili. It is an experiment in giving authors the two things platforms have always
+            rented back to them: their identity and their income.
           </p>
         </div>
       </section>
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <h2 className="font-display text-sm uppercase tracking-[0.2em] text-btc md:pt-2">II. Our Mission</h2>
           <div>
             <blockquote className="border-l-2 border-btc pl-6 font-display text-2xl italic leading-snug text-cream sm:text-3xl">
-              “Publish freely. Earn directly. Own the relationship with every reader.”
+              “Your voice. Your story. Your freedom.”
             </blockquote>
             <p className="prose-reading mt-8">
               We’re building a publishing tool where the author’s key is the account, the open network is the

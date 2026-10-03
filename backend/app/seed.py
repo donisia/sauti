@@ -47,7 +47,7 @@ def seed_database():
             initials="DA",
             bio="The simulated identity used when no NIP-07 signer is installed. Publish a book to see it here.",
             location="Somewhere on the network",
-            lightning_address="demo@sovereign.pub",
+            lightning_address="demo@sauti.pub",
             avatar_hue=30,
             joined_at=now,
         )
