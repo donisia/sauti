@@ -13,6 +13,8 @@ import {
   PlusCircle,
   Radio,
   ShieldCheck,
+  Smartphone,
+  Sparkles,
   TrendingUp,
   Users,
   Wallet,
@@ -24,7 +26,7 @@ import EmptyState from '../components/common/EmptyState';
 import { PageError, PageLoading } from '../components/common/PageStatus';
 import { useApi } from '../hooks/useApi';
 import { useNostr } from '../hooks/useNostr';
-import { formatSats } from '../utils/lightning';
+import { formatKes, formatSats } from '../utils/lightning';
 import { formatDate, formatNumber, timeAgo } from '../utils/format';
 import { shortenKey } from '../utils/nostr';
 
@@ -123,29 +125,58 @@ function PublicationsTable({ books }) {
 function IncomeFeed({ entries, limit }) {
   const list = limit ? entries.slice(0, limit) : entries;
   if (list.length === 0) {
-    return <p className="py-8 text-center text-sm text-cream-faint">No payments yet. Paid chapter unlocks will appear here.</p>;
+    return (
+      <p className="py-8 text-center text-sm text-cream-faint">No payments yet. Chapter unlocks and subscriptions will appear here.</p>
+    );
   }
   return (
     <ul className="divide-y divide-line">
-      {list.map((entry) => (
-        <li key={entry.id} className="flex items-center gap-3 py-3.5">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-btc/10 text-btc">
-            <Zap className="h-4 w-4" fill="currentColor" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm text-cream">
-              Ch. {entry.chapterNumber} · {entry.chapterTitle}
-            </p>
-            <p className="truncate text-xs text-cream-faint">
-              {entry.bookTitle} · <span className="font-mono">{entry.reader}…</span>
-            </p>
-          </div>
-          <div className="shrink-0 text-right">
-            <p className="font-mono text-sm text-btc">+{formatSats(entry.sats)}</p>
-            <p className="text-[11px] text-cream-faint">{timeAgo(entry.at)}</p>
-          </div>
-        </li>
-      ))}
+      {list.map((entry) => {
+        const mpesa = entry.method === 'mpesa';
+        const subscription = entry.purpose === 'subscription';
+        return (
+          <li key={entry.id} className="flex items-center gap-3 py-3.5">
+            <span
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                mpesa ? 'bg-emerald-400/10 text-emerald-300' : 'bg-btc/10 text-btc'
+              }`}
+              title={mpesa ? 'M-Pesa' : 'Lightning'}
+            >
+              {mpesa ? <Smartphone className="h-4 w-4" /> : <Zap className="h-4 w-4" fill="currentColor" />}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm text-cream">
+                {subscription ? (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Sparkles className="h-3.5 w-3.5 text-violet-300" /> Monthly subscription
+                  </span>
+                ) : (
+                  `Ch. ${entry.chapterNumber} · ${entry.chapterTitle}`
+                )}
+              </p>
+              <p className="truncate text-xs text-cream-faint">
+                {subscription ? 'All paid chapters' : entry.bookTitle} · {mpesa ? 'M-Pesa' : 'Lightning'} ·{' '}
+                <span className="font-mono">{entry.reader}…</span>
+              </p>
+            </div>
+            <div className="shrink-0 text-right">
+              {mpesa && entry.kes ? (
+                <>
+                  <p className="font-mono text-sm text-emerald-300">+{formatKes(entry.kes)}</p>
+                  <p className="text-[11px] text-cream-faint">
+                    {formatSats(entry.sats)} sats · {timeAgo(entry.at)}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="font-mono text-sm text-btc">+{formatSats(entry.sats)}</p>
+                  <p className="text-[11px] text-cream-faint">{timeAgo(entry.at)}</p>
+                </>
+              )}
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -185,7 +216,7 @@ export default function AuthorDashboardPage() {
   const author = data?.author;
   const myBooks = data?.books ?? [];
   const income = data?.income ?? [];
-  const stats = data?.stats ?? { books: 0, chapters: 0, paidReaders: 0, satsEarned: 0, satsToday: 0, satsWeek: 0 };
+  const stats = data?.stats ?? { books: 0, chapters: 0, paidReaders: 0, subscribers: 0, satsEarned: 0, satsToday: 0, satsWeek: 0 };
   const weekly = data?.weekly ?? [];
   const displayName = author?.name && author.name !== 'Anonymous Author' ? author.name.split(' ')[0] : 'author';
 
@@ -264,7 +295,12 @@ export default function AuthorDashboardPage() {
               <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
                 <KpiCard icon={BookOpen} label="Published Books" value={stats.books} />
                 <KpiCard icon={Layers} label="Total Chapters" value={stats.chapters} />
-                <KpiCard icon={Users} label="Paid Readers" value={formatNumber(stats.paidReaders)} />
+                <KpiCard
+                  icon={Users}
+                  label="Paid Readers"
+                  value={formatNumber(stats.paidReaders)}
+                  hint={stats.subscribers ? `${formatNumber(stats.subscribers)} monthly subscribers` : undefined}
+                />
                 <KpiCard
                   icon={Zap}
                   label="Sats Earned"
@@ -286,7 +322,7 @@ export default function AuthorDashboardPage() {
 
                 <section className="card p-5">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-xl text-cream">Recent Lightning Income</h2>
+                    <h2 className="font-display text-xl text-cream">Recent Income</h2>
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -330,11 +366,11 @@ export default function AuthorDashboardPage() {
                 </section>
               )}
               <section className="card p-6">
-                <h2 className="font-display text-xl text-cream">Lightning income log</h2>
+                <h2 className="font-display text-xl text-cream">Income log</h2>
                 <p className="mt-1 text-xs text-cream-faint">
                   {author?.lightningAddress
-                    ? `Each payment settles directly to ${author.lightningAddress}.`
-                    : 'Each payment settles directly to the author’s wallet.'}
+                    ? `Lightning payments settle directly to ${author.lightningAddress}; M-Pesa payments are shown in KES at the rate paid.`
+                    : 'Lightning payments settle directly to the author’s wallet; M-Pesa payments are shown in KES at the rate paid.'}
                 </p>
                 <IncomeFeed entries={income} />
               </section>

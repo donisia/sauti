@@ -76,12 +76,17 @@ const enc = encodeURIComponent;
 
 /** Public (unauthenticated) endpoints. */
 export const api = {
+  health: (opts) => apiRequest('/health', opts),
   listBooks: (params = {}, opts) => apiRequest(`/books${qs(params)}`, opts),
   getBook: (id, opts) => apiRequest(`/books/${enc(id)}`, opts),
   getChapter: (bookId, chapterId, opts) => apiRequest(`/books/${enc(bookId)}/chapters/${enc(chapterId)}`, opts),
   getAuthor: (npub, opts) => apiRequest(`/authors/${enc(npub)}`, opts),
 
-  createInvoice: (bookId, chapterId) => apiRequest('/invoices', { method: 'POST', body: { bookId, chapterId } }),
+  /**
+   * body: { bookId, chapterId } or { type: 'subscription', authorNpub },
+   * plus { method: 'lightning' | 'mpesa', phone } for M-Pesa.
+   */
+  createInvoice: (body) => apiRequest('/invoices', { method: 'POST', body }),
   getInvoice: (hash) => apiRequest(`/invoices/${enc(hash)}`),
   simulateInvoice: (hash, outcome) => apiRequest(`/invoices/${enc(hash)}/simulate`, { method: 'POST', body: { outcome } }),
 

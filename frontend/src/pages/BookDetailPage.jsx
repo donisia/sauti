@@ -17,6 +17,7 @@ import BookCover from '../components/common/BookCover';
 import AuthorAvatar from '../components/common/AuthorAvatar';
 import CopyButton from '../components/common/CopyButton';
 import EmptyState from '../components/common/EmptyState';
+import SubscriptionCard from '../components/common/SubscriptionCard';
 import { PageError, PageLoading } from '../components/common/PageStatus';
 import { useApi } from '../hooks/useApi';
 import { useLightning } from '../hooks/useLightning';
@@ -67,7 +68,7 @@ function ChapterRow({ book, chapter }) {
           </Link>
         ) : (
           <button type="button" onClick={() => openPayment(book, chapter)} className="btn-primary btn-sm w-full sm:w-auto">
-            <Zap className="h-3.5 w-3.5" fill="currentColor" /> Unlock with Lightning
+            <Zap className="h-3.5 w-3.5" fill="currentColor" /> Unlock chapter
           </button>
         )}
       </div>
@@ -260,6 +261,8 @@ export default function BookDetailPage() {
                 View all books by {author.name.split(' ')[0]}
               </Link>
             </div>
+
+            {startingPrice > 0 && <SubscriptionCard author={author} />}
 
             {/* Provenance card */}
             <div className="panel p-6">

@@ -18,6 +18,7 @@ class Author(db.Model):
     location = db.Column(db.String(120), nullable=False, default="")
     lightning_address = db.Column(db.String(160), nullable=False, default="")
     avatar_hue = db.Column(db.Integer, nullable=False, default=30)
+    subscription_price_sats = db.Column(db.Integer, nullable=False, default=3000)
     joined_at = db.Column(db.DateTime, nullable=False, default=utcnow)
 
     books = db.relationship("Book", back_populates="author", order_by="Book.published_at.desc()")
@@ -71,17 +72,50 @@ class Chapter(db.Model):
 
 
 class Invoice(db.Model):
-    payment_hash = db.Column(db.String(64), primary_key=True)
-    bolt11 = db.Column(db.Text, nullable=False)
-    chapter_id = db.Column(db.Integer, db.ForeignKey("chapter.id"), nullable=False, index=True)
+    """
+    One payment attempt by a reader, for a single chapter or a monthly
+    subscription, over Lightning or M-Pesa.
+    """
+
+    payment_hash = db.Column(db.String(64), primary_key=True)  # Lightning hash, or a random id for M-Pesa
+    method = db.Column(db.String(10), nullable=False, default="lightning")  # lightning | mpesa
+    purpose = db.Column(db.String(15), nullable=False, default="chapter")  # chapter | subscription
+    chapter_id = db.Column(db.Integer, db.ForeignKey("chapter.id"), nullable=True, index=True)
+    author_pubkey = db.Column(db.String(64), db.ForeignKey("author.pubkey"), nullable=True, index=True)
     reader_id = db.Column(db.String(64), nullable=False, index=True)
     amount_sats = db.Column(db.Integer, nullable=False)
+    amount_kes = db.Column(db.Integer, nullable=True)
     status = db.Column(db.String(10), nullable=False, default="pending")  # pending | paid | failed | expired
+    bolt11 = db.Column(db.Text, nullable=True)
+    phone = db.Column(db.String(15), nullable=True)
+    provider_ref = db.Column(db.String(80), nullable=True, index=True)  # M-Pesa CheckoutRequestID
+    receipt = db.Column(db.String(40), nullable=True)  # M-Pesa receipt number
+    failure_reason = db.Column(db.String(200), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=utcnow)
     expires_at = db.Column(db.DateTime, nullable=False)
+    checked_at = db.Column(db.DateTime, nullable=True)
     paid_at = db.Column(db.DateTime, nullable=True)
 
     chapter = db.relationship("Chapter")
+    author = db.relationship("Author")
+
+    @property
+    def beneficiary_pubkey(self):
+        """The author who earns this payment."""
+        return self.author_pubkey or self.chapter.book.author_pubkey
+
+
+class Subscription(db.Model):
+    """A reader's monthly pass to every paid chapter by one author."""
+
+    id = db.Column(db.Integer, primary_key=True)
+    reader_id = db.Column(db.String(64), nullable=False, index=True)
+    author_pubkey = db.Column(db.String(64), db.ForeignKey("author.pubkey"), nullable=False, index=True)
+    invoice_hash = db.Column(db.String(64), db.ForeignKey("invoice.payment_hash"), nullable=True)
+    started_at = db.Column(db.DateTime, nullable=False, default=utcnow)
+    expires_at = db.Column(db.DateTime, nullable=False)
+
+    author = db.relationship("Author")
 
 
 class Unlock(db.Model):

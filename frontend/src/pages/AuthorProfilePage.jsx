@@ -4,6 +4,7 @@ import AuthorAvatar from '../components/common/AuthorAvatar';
 import BookCard from '../components/common/BookCard';
 import CopyButton from '../components/common/CopyButton';
 import EmptyState from '../components/common/EmptyState';
+import SubscriptionCard from '../components/common/SubscriptionCard';
 import { PageError, PageLoading } from '../components/common/PageStatus';
 import { useApi } from '../hooks/useApi';
 import { useNostr } from '../hooks/useNostr';
@@ -155,6 +156,7 @@ export default function AuthorProfilePage() {
           </div>
 
           <aside className="grid grid-cols-3 gap-3 self-start lg:grid-cols-1">
+            {author && !isMe && <SubscriptionCard author={author} className="col-span-3 lg:col-span-1" />}
             {[
               { label: 'Books', value: authorBooks.length },
               { label: 'Chapters', value: totalChapters },

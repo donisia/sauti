@@ -1,0 +1,590 @@
+{
+  "authors": [
+    {
+      "npub": "npub15feryxhrdz9m6y09mr8wrerwzgj6f8ntxvhxyrdlm5aahn0t09nl4ujy86",
+      "name": "Wole Soyinka",
+      "initials": "WS",
+      "location": "Abeokuta, Nigeria",
+      "lightningAddress": "",
+      "joined": "2026-08-01",
+      "bio": "Playwright, poet and essayist, and the first African laureate of the Nobel Prize in Literature (1986). His prison memoir and political essays chart a lifetime of opposition to dictatorship in Nigeria.",
+      "avatarHue": 42
+    },
+    {
+      "npub": "npub124fl6zy54klay937yrnujckpak28lrdjg0eel92ue3gm36kcwf9tfwwqlt",
+      "name": "Nadine Gordimer",
+      "initials": "NG",
+      "location": "Johannesburg, South Africa",
+      "lightningAddress": "",
+      "joined": "2026-08-03",
+      "bio": "South African novelist and Nobel laureate (1991) whose fiction examined the moral and private costs of apartheid. Several of her books were banned by the apartheid government.",
+      "avatarHue": 205
+    },
+    {
+      "npub": "npub1sjqf6h5graeeeex7ervydu284rxqfxhpydcfskh788la77n9fx4s72pdhf",
+      "name": "Ngũgĩ wa Thiong'o",
+      "initials": "NT",
+      "location": "Limuru, Kenya",
+      "lightningAddress": "",
+      "joined": "2026-08-05",
+      "bio": "Kenyan novelist, playwright and theorist of decolonisation who chose to write in Gĩkũyũ. Detained without trial in 1977 after the community performance of a play he co-wrote with Ngũgĩ wa Mĩriĩ.",
+      "avatarHue": 88
+    },
+    {
+      "npub": "npub1pn9sh2kw4wv0ewvlkpp37svkukh9wxw7v4d7q7k98cv7tm49eae922gpfa",
+      "name": "Michela Wrong",
+      "initials": "MW",
+      "location": "London, United Kingdom",
+      "lightningAddress": "",
+      "joined": "2026-08-07",
+      "bio": "Journalist and author who has reported on Africa for decades. Her books investigate power, patronage and the people who stand up to them.",
+      "avatarHue": 0
+    },
+    {
+      "npub": "npub1f7kfgpqxgmvdpsdj05s6grka6gfputqftf78r57xr0v3zxupyu5v3u70sv",
+      "name": "Chimamanda Ngozi Adichie",
+      "initials": "CA",
+      "location": "Lagos, Nigeria",
+      "lightningAddress": "",
+      "joined": "2026-08-10",
+      "bio": "Nigerian novelist and essayist whose talks on feminism and the danger of a single story reached readers far beyond literature.",
+      "avatarHue": 330
+    },
+    {
+      "npub": "npub1ug68eu5y0mydn8fhfsgawxel2w2me46vk59hp4aupc4jy8wx9s3zt3gmse",
+      "name": "Mariama Bâ",
+      "initials": "MB",
+      "location": "Dakar, Senegal",
+      "lightningAddress": "",
+      "joined": "2026-08-12",
+      "bio": "Senegalese teacher, activist and novelist. Her first novel, written in French, won the inaugural Noma Award for Publishing in Africa in 1980.",
+      "avatarHue": 270
+    },
+    {
+      "npub": "npub1fl593rtmy3p9s9wys8aq463gz082srtvnndjut3kpszqpv70uxmlendw4v",
+      "name": "Tsitsi Dangarembga",
+      "initials": "TD",
+      "location": "Harare, Zimbabwe",
+      "lightningAddress": "",
+      "joined": "2026-08-14",
+      "bio": "Zimbabwean novelist and filmmaker. Her debut was the first novel published in English by a Black Zimbabwean woman.",
+      "avatarHue": 160
+    },
+    {
+      "npub": "npub1gekrgqysm2r9cj0jzat23uqsh450zndktq4c973v0q9s9fezepnnw9fc5l",
+      "name": "Buchi Emecheta",
+      "initials": "BE",
+      "location": "Lagos, Nigeria · London",
+      "lightningAddress": "",
+      "joined": "2026-08-16",
+      "bio": "Nigerian-born novelist who wrote more than twenty books about motherhood, migration and the lives of African women, often drawing on her own.",
+      "avatarHue": 18
+    },
+    {
+      "npub": "npub1fjfzmgpw9pzghxcurp0lsqay9y7sys0dwalcy7jzvyf4sngq7rl3xdljja",
+      "name": "Nawal El Saadawi",
+      "initials": "NS",
+      "location": "Cairo, Egypt",
+      "lightningAddress": "",
+      "joined": "2026-08-18",
+      "bio": "Egyptian physician, psychiatrist and writer who campaigned against the oppression of women and was imprisoned for her views in 1981.",
+      "avatarHue": 350
+    },
+    {
+      "npub": "npub1aa8vn97pjayu3cddy9fshg38hwllep2qluenf6kc584q54e8vqjshyecyh",
+      "name": "Ama Ata Aidoo",
+      "initials": "AA",
+      "location": "Accra, Ghana",
+      "lightningAddress": "",
+      "joined": "2026-08-20",
+      "bio": "Ghanaian playwright, novelist and poet, and a former Minister of Education, whose work centres the choices available to modern African women.",
+      "avatarHue": 48
+    },
+    {
+      "npub": "npub1m3r3xrjf03m5vhmped9r6ugjlrg2764jnsse0n7e822ydlwu4umgv09t49",
+      "name": "Flora Nwapa",
+      "initials": "FN",
+      "location": "Oguta, Nigeria",
+      "lightningAddress": "",
+      "joined": "2026-08-22",
+      "bio": "Nigerian novelist and publisher, often called the mother of modern African women's writing. Her first novel appeared in Heinemann's African Writers Series in 1966.",
+      "avatarHue": 190
+    }
+  ],
+  "books": [
+    {
+      "id": "the-open-sore-of-a-continent",
+      "title": "The Open Sore of a Continent",
+      "subtitle": "A Personal Narrative of the Nigerian Crisis",
+      "authorNpub": "npub15feryxhrdz9m6y09mr8wrerwzgj6f8ntxvhxyrdlm5aahn0t09nl4ujy86",
+      "category": "Politics",
+      "language": "English",
+      "publishedAt": "2026-09-28",
+      "featured": false,
+      "tags": ["african literature", "nigeria", "essays", "democracy"],
+      "description": "Written in exile in the mid-1990s, Soyinka's essays ask whether Nigeria can survive as a nation after the annulment of the 1993 election and the execution of Ken Saro-Wiwa. A reading companion to the book, chapter by chapter.",
+      "coverUrl": "/covers/the-open-sore-of-a-continent.jpg",
+      "cover": { "from": "#3A1410", "to": "#0E0706", "accent": "#E4B33A", "motif": "lines" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "The Annulled Mandate", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "The book opens on the election of 12 June 1993, widely regarded as the freest Nigeria had held, and on the military's decision to annul it. Soyinka treats the annulment not as a single crime but as the moment the state openly declared that the will of its citizens was optional.",
+            "He writes as a participant rather than an observer: someone who knew the actors, marched with the protesters, and eventually left the country under threat. The personal frame is deliberate. The crisis, he insists, is lived in individual bodies before it becomes a headline.",
+            "This companion section traces his central question, which recurs throughout the essays: when a ruling class abolishes the people's choice, what obligation does anyone still have to the nation that class claims to defend?"
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "A Nation in Question", "isFree": false, "priceSats": 180, "readingMinutes": 7,
+          "content": [
+            "Soyinka turns from events to ideas, asking what a nation actually is. He rejects the notion that borders drawn by colonial administrators are sacred, while also refusing the easy answer that Nigeria should simply dissolve.",
+            "His argument rests on consent. A nation, in his telling, is a continuing agreement among peoples, and an agreement can be broken by those who rule as surely as by those who rebel. The image of the open sore comes from this idea of a wound kept raw by neglect.",
+            "Readers will notice how often he returns to the language of accountability: who answers, to whom, and for what. It is the thread that ties his political essays to his earlier prison writing."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Ogoni and the Price of Oil", "isFree": false, "priceSats": 220, "readingMinutes": 8,
+          "content": [
+            "The final movement centres on the Ogoni people of the Niger Delta and on the writer and activist Ken Saro-Wiwa, executed by the military government in November 1995 alongside eight others after a trial condemned around the world.",
+            "Soyinka connects the oil wealth beneath Ogoni land to the poverty and pollution above it, and to the violence used against anyone who named the contradiction. The Delta becomes his clearest case of a state treating a region as a resource rather than a people.",
+            "He closes not with despair but with a demand: that minorities be heard on their own terms, and that any future Nigeria be rebuilt from the consent of all its peoples."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-man-died",
+      "title": "The Man Died",
+      "subtitle": "The Prison Notes of Wole Soyinka",
+      "authorNpub": "npub15feryxhrdz9m6y09mr8wrerwzgj6f8ntxvhxyrdlm5aahn0t09nl4ujy86",
+      "category": "Non-fiction",
+      "language": "English",
+      "publishedAt": "2026-09-24",
+      "featured": false,
+      "tags": ["african literature", "prison memoir", "nigeria", "civil war"],
+      "description": "Soyinka was detained in 1967, early in the Nigerian Civil War, and held for some two years, much of it in solitary confinement. His notes from that time are a record of survival and of a mind refusing silence. A reading companion to the book, chapter by chapter.",
+      "coverUrl": "/covers/the-man-died.png",
+      "cover": { "from": "#1E2A1A", "to": "#080B07", "accent": "#E05A3A", "motif": "grid" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "The Arrest", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "In August 1967 Soyinka was arrested by the federal government after travelling to the secessionist east in an attempt to argue for peace. He was accused of aiding Biafra, a charge he denied, and was never brought to trial.",
+            "The opening notes describe the disorientation of detention without charge: the interrogations, the forged confession circulated in his name, and his effort to keep an exact account of what was being done to him.",
+            "The title points to the conviction that runs through the whole book: that a person's humanity dies when they stay silent in the face of tyranny. Writing becomes his way of staying alive."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Solitary", "isFree": false, "priceSats": 200, "readingMinutes": 8,
+          "content": [
+            "Moved to Kaduna, Soyinka spent long stretches in solitary confinement. The notes in this part turn inward, recording how isolation distorts time, appetite and memory, and the small disciplines he invented to resist it.",
+            "He wrote on whatever he could hide, including the margins of books and scraps of toilet paper, and some of the passages read almost like poetry. Insects, light through a high window and the routines of the guards become companions.",
+            "This is the heart of the book: not a catalogue of suffering but an account of how a mind keeps its shape when everything around it is designed to break it."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Release and Reckoning", "isFree": false, "priceSats": 200, "readingMinutes": 7,
+          "content": [
+            "Soyinka was released in October 1969, shortly before the war ended. The final notes look back at the officials, collaborators and fellow prisoners he encountered, naming names where he believed silence would be complicity.",
+            "He reflects on what the war did to Nigeria and to the people caught between its armies, and on the danger of a peace built on forgetting.",
+            "The book ends as a challenge to its readers: detention was meant to make him disappear, and the notes are proof that it failed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "burgers-daughter",
+      "title": "Burger's Daughter",
+      "subtitle": "A novel",
+      "authorNpub": "npub124fl6zy54klay937yrnujckpak28lrdjg0eel92ue3gm36kcwf9tfwwqlt",
+      "category": "Fiction",
+      "language": "English",
+      "publishedAt": "2026-09-22",
+      "featured": false,
+      "tags": ["african literature", "south africa", "apartheid", "women"],
+      "description": "Rosa Burger grows up as the daughter of a famous anti-apartheid activist and has to decide whether her life belongs to the struggle, to her family's memory or to herself. Briefly banned in South Africa on publication in 1979. A reading companion to the novel, chapter by chapter.",
+      "coverUrl": "/covers/burgers-daughter.png",
+      "cover": { "from": "#20303A", "to": "#090D10", "accent": "#C9D6DF", "motif": "wave" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Outside the Prison", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "The novel opens with Rosa as a schoolgirl standing outside a prison with a parcel for her detained mother, watched by people who see her only as the child of famous revolutionaries.",
+            "Her father, Lionel Burger, is an Afrikaner doctor and communist whose commitment to ending apartheid shapes every part of the household. When he later dies in prison, Rosa inherits not only grief but a public identity she never chose.",
+            "Gordimer moves between Rosa's inner voice and the way others describe her, a structure that makes the reader feel how little of her life is private."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Leaving", "isFree": false, "priceSats": 240, "readingMinutes": 8,
+          "content": [
+            "Rosa obtains a passport and leaves South Africa for the south of France, where she stays with her father's first wife, Katya, who long ago stepped away from politics.",
+            "In this freer world she begins a love affair and tries on a life without obligation. Gordimer lets the pleasure feel real while quietly asking whether anyone from Rosa's country can be free while others remain unfree.",
+            "A painful encounter in London with someone from her childhood breaks the spell and forces her to face what she left behind."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Return", "isFree": false, "priceSats": 260, "readingMinutes": 8,
+          "content": [
+            "Rosa goes home. The novel's final part is set around the Soweto uprising of 1976, when students rose against apartheid education and the state answered with violence.",
+            "She takes work as a physiotherapist, treating injured children, and is eventually detained herself, completing a circle that began outside a prison gate.",
+            "The ending is not a triumph but a choice made with open eyes: Rosa accepts the inheritance on her own terms, as an adult rather than as Burger's daughter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "i-will-marry-when-i-want",
+      "title": "I Will Marry When I Want",
+      "subtitle": "A play by Ngũgĩ wa Thiong'o & Ngũgĩ wa Mĩriĩ",
+      "authorNpub": "npub1sjqf6h5graeeeex7ervydu284rxqfxhpydcfskh788la77n9fx4s72pdhf",
+      "category": "Culture",
+      "language": "English",
+      "publishedAt": "2026-09-20",
+      "featured": false,
+      "tags": ["african literature", "kenya", "drama", "gikuyu"],
+      "description": "First written and performed in Gĩkũyũ as Ngaahika Ndeenda by villagers at the Kamĩrĩĩthũ community centre in 1977, the play was shut down by the government and led to Ngũgĩ's detention. A reading companion to the play, act by act.",
+      "coverUrl": "/covers/i-will-marry-when-i-want.png",
+      "cover": { "from": "#3A3418", "to": "#0E0C06", "accent": "#C9B84A", "motif": "arch" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Act One: The Title Deed", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "Kĩgũũnda, a farm labourer, and his wife Wangeci live in a small hut. Their most precious possession is the title deed to a plot of land, framed on the wall as proof that independence meant something for families like theirs.",
+            "Their daughter Gathoni is being courted by John Muhũũni, the son of Kĩoi, the wealthy landowner Kĩgũũnda works for. Wangeci dreams of the match lifting the family; Kĩgũũnda is suspicious.",
+            "Song and dance carry much of the meaning. The play was built with its community audience, and the songs recall the land struggle and the Mau Mau fighters whose sacrifice the new elite has forgotten."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Act Two: A Church Wedding", "isFree": false, "priceSats": 160, "readingMinutes": 7,
+          "content": [
+            "Kĩoi and his wife Jezebel visit Kĩgũũnda's home and insist that he and Wangeci, married under custom for decades, must hold a Christian church wedding to be respectable.",
+            "To pay for it, Kĩgũũnda takes a loan using his title deed as security. The scenes are funny and biting at once, satirising the borrowed manners of the new rich and the institutions that serve them.",
+            "The playwrights show religion, banks and foreign capital working together, each smiling, each taking something from the poor."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Act Three: The Land Is Gone", "isFree": false, "priceSats": 180, "readingMinutes": 7,
+          "content": [
+            "Gathoni becomes pregnant and Muhũũni abandons her. When Kĩgũũnda cannot repay the loan, he loses the land. The framed deed on the wall becomes a symbol of everything that has been taken.",
+            "The play refuses to end in defeat. Its final song calls on workers and peasants to organise, turning the family's tragedy into a lesson about who owns the country.",
+            "That ending is why the authorities closed the theatre: a play performed by villagers, for villagers, in their own language, was more dangerous to them than any pamphlet."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "its-our-turn-to-eat",
+      "title": "It's Our Turn to Eat",
+      "subtitle": "The Story of a Kenyan Whistle-Blower",
+      "authorNpub": "npub1pn9sh2kw4wv0ewvlkpp37svkukh9wxw7v4d7q7k98cv7tm49eae922gpfa",
+      "category": "Politics",
+      "language": "English",
+      "publishedAt": "2026-09-18",
+      "featured": false,
+      "tags": ["kenya", "corruption", "journalism", "east africa"],
+      "description": "The story of John Githongo, the anti-corruption chief appointed after Kenya's 2002 election, who uncovered a scandal reaching into the cabinet and fled to London with his evidence. A reading companion to the book, chapter by chapter.",
+      "coverUrl": "/covers/its-our-turn-to-eat.png",
+      "cover": { "from": "#3A2A12", "to": "#0E0A05", "accent": "#D04A2A", "motif": "grid" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "A New Dawn", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "In December 2002, Kenyans voted out the party that had ruled since independence. Mwai Kibaki's government promised to end corruption, and appointed John Githongo, a respected campaigner, as its anti-corruption permanent secretary.",
+            "Wrong introduces Githongo as an insider and an idealist: from a well-connected family, trusted by the new leadership, and convinced that the moment for change had finally arrived.",
+            "The book's title comes from a phrase often heard in Kenyan politics: the idea that when your community's leader takes power, it is your group's turn to eat from the state."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Anglo Leasing", "isFree": false, "priceSats": 220, "readingMinutes": 8,
+          "content": [
+            "Githongo begins investigating a set of government security contracts, including one awarded to a company called Anglo Leasing, and finds payments for services that were never delivered.",
+            "As the trail leads closer to senior ministers, he starts secretly recording his conversations. Colleagues who once encouraged him now urge him to slow down, and friendly warnings become threats.",
+            "Wrong explains how ethnic loyalty can turn corruption into a kind of duty, and why that makes it so hard to confront from inside government."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Exile and Evidence", "isFree": false, "priceSats": 240, "readingMinutes": 8,
+          "content": [
+            "In early 2005, Githongo leaves Kenya for Britain, where he prepares a detailed dossier on what he found. Its publication shakes the government and triggers resignations.",
+            "Wrong follows the personal cost: isolation, accusations of betrayal from his own community, and the long uncertainty of whether anything will change.",
+            "The book ends by connecting his story to the violence that followed Kenya's 2007 election, arguing that politics built on taking turns to eat leaves the whole country hungry."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "we-should-all-be-feminists",
+      "title": "We Should All Be Feminists",
+      "subtitle": "An essay",
+      "authorNpub": "npub1f7kfgpqxgmvdpsdj05s6grka6gfputqftf78r57xr0v3zxupyu5v3u70sv",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-30",
+      "featured": false,
+      "tags": ["feminism", "african literature", "nigeria", "essay"],
+      "description": "Adapted from her TEDx talk, Adichie's short essay offers a personal, funny and direct definition of feminism for the twenty-first century, drawing on her life in Nigeria and the United States. A reading companion to the essay, section by section.",
+      "cover": { "from": "#4A1830", "to": "#12060C", "accent": "#F2A7C3", "motif": "sun" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Being Called a Feminist", "isFree": true, "priceSats": 0, "readingMinutes": 5,
+          "content": [
+            "Adichie begins with the first time someone called her a feminist, as a teenager in an argument with a childhood friend, and it was not a compliment.",
+            "Over the years she collects the labels people attach to the word: unhappy, un-African, anti-men, anti-make-up. She answers each with humour, eventually describing herself as a happy African feminist who likes lipstick.",
+            "The point of these stories is that the word itself frightens people, and that the fear says more about our expectations of women than about feminism."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "What We Teach Girls", "isFree": false, "priceSats": 150, "readingMinutes": 6,
+          "content": [
+            "Adichie turns to everyday moments: a waiter greeting only the man at the table, a girl who is not made class monitor despite the best marks, a woman who hides her success so as not to threaten a husband.",
+            "She argues that we raise girls to shrink themselves and to treat marriage as an achievement, while raising boys to be afraid of weakness. Both, she says, are damaged by the same narrow script.",
+            "These examples are small on purpose. Inequality, in her telling, is built from thousands of ordinary habits that feel natural only because they are familiar."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Culture Does Not Make People", "isFree": false, "priceSats": 150, "readingMinutes": 5,
+          "content": [
+            "The essay closes with the objection that feminism goes against culture. Adichie replies that culture is made by people and constantly changes, so it cannot be a reason to deny half of them full humanity.",
+            "She offers her own definition: a feminist is anyone, man or woman, who sees a problem with gender as it is today and wants to fix it.",
+            "The final call is practical: raise children differently, notice what we take for granted, and do better."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "so-long-a-letter",
+      "title": "So Long a Letter",
+      "subtitle": "A novel",
+      "authorNpub": "npub1ug68eu5y0mydn8fhfsgawxel2w2me46vk59hp4aupc4jy8wx9s3zt3gmse",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-29",
+      "featured": false,
+      "tags": ["feminism", "african literature", "senegal", "epistolary"],
+      "description": "Newly widowed, Ramatoulaye writes a long letter to her closest friend about marriage, polygamy, faith and the choices open to women in post-independence Senegal. Winner of the first Noma Award (1980). A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#2A1A4A", "to": "#0A0612", "accent": "#E8C27A", "motif": "arch" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "The Days of Mourning", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "Ramatoulaye's husband, Modou Fall, has died suddenly. During the period of seclusion that follows, she begins writing to her friend Aïssatou, who lives far away.",
+            "The funeral rites bring crowds, gifts and obligations, and expose the family's finances. Ramatoulaye records it all with a sharp eye for the gap between ceremony and feeling.",
+            "The letter form lets Bâ give a woman a voice that is intimate, reflective and uninterrupted, something Ramatoulaye has rarely had in her marriage."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Two Marriages", "isFree": false, "priceSats": 170, "readingMinutes": 8,
+          "content": [
+            "Ramatoulaye remembers how, after twenty-five years and twelve children, Modou secretly took a second wife: Binetou, a young schoolfriend of their daughter. Ramatoulaye chose to stay.",
+            "She contrasts this with Aïssatou's choice years earlier. When Aïssatou's husband, Mawdo, took a second wife under pressure from his mother, Aïssatou left him, educated herself and built a new life abroad.",
+            "Bâ does not judge either woman. The two marriages become two answers to the same question about dignity, love and independence."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "A New Beginning", "isFree": false, "priceSats": 170, "readingMinutes": 7,
+          "content": [
+            "When the mourning ends, suitors arrive, including Modou's brother, who expects to inherit her as a wife. Ramatoulaye refuses him, and later declines an old admirer too.",
+            "She turns her attention to her children, who are growing up in a changing Senegal, and finds herself defending choices she would once have condemned.",
+            "The letter ends in hope. Ramatoulaye still believes in love and in marriage, but only as a partnership of equals."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nervous-conditions",
+      "title": "Nervous Conditions",
+      "subtitle": "A novel",
+      "authorNpub": "npub1fl593rtmy3p9s9wys8aq463gz082srtvnndjut3kpszqpv70uxmlendw4v",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-27",
+      "featured": false,
+      "tags": ["feminism", "african literature", "zimbabwe", "coming of age"],
+      "description": "In 1960s Rhodesia, Tambudzai fights for the education reserved for her brother, and discovers that leaving the homestead brings its own traps. A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#173A2E", "to": "#06100C", "accent": "#E5A23A", "motif": "lines" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "The Homestead", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "Tambu grows up on a poor homestead where school fees are found for her brother Nhamo but not for her. Determined, she grows and sells maize to pay her own way.",
+            "When Nhamo dies, the family's hopes pass to Tambu, and their wealthy, mission-educated uncle Babamukuru takes her to live with his family at the mission school.",
+            "Tambu narrates as an adult looking back, honest about her ambition and about the uncomfortable fact that her brother's death opened the door for her."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "The Mission", "isFree": false, "priceSats": 190, "readingMinutes": 8,
+          "content": [
+            "At the mission, Tambu meets her cousin Nyasha, who has spent years in England and no longer fits anywhere. Nyasha reads widely, argues with her father and questions everything Tambu is learning to admire.",
+            "Babamukuru is generous and controlling at once. His authority depends on a colonial education, and he expects gratitude and obedience from everyone in his household, especially the women.",
+            "Through the two girls, Dangarembga shows that education is both a way out and a new kind of colonisation of the mind."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Nervous Conditions", "isFree": false, "priceSats": 190, "readingMinutes": 8,
+          "content": [
+            "Nyasha's rebellion turns inward and she develops a serious eating disorder, a breakdown the novel presents as a response to impossible pressures of race, gender and family.",
+            "Tambu wins a place at an elite convent school and, despite her mother's warnings, accepts it. Her success and Nyasha's collapse are told side by side.",
+            "The title comes from Jean-Paul Sartre's preface to Frantz Fanon, which describes the condition of colonised people as a nervous one. Dangarembga applies it to the women of her story."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-joys-of-motherhood",
+      "title": "The Joys of Motherhood",
+      "subtitle": "A novel",
+      "authorNpub": "npub1gekrgqysm2r9cj0jzat23uqsh450zndktq4c973v0q9s9fezepnnw9fc5l",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-26",
+      "featured": false,
+      "tags": ["feminism", "african literature", "nigeria", "colonial lagos"],
+      "description": "Nnu Ego believes that children are a woman's whole worth, and gives everything to hers in colonial Lagos. The title is bitterly ironic. A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#4A2A10", "to": "#120A04", "accent": "#F0C27A", "motif": "moon" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Childless", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "The novel opens in crisis: Nnu Ego, overcome with grief, runs through Lagos towards the water. Emecheta then steps back to tell us how she arrived at that moment.",
+            "She is the daughter of a powerful chief, Agbadi, in the town of Ibuza. Her first marriage fails because she cannot conceive, and a woman without children is treated as if she has failed at life itself.",
+            "Emecheta sets up the novel's central tension: a society that gives women value only through motherhood, and a woman who believes it completely."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Lagos", "isFree": false, "priceSats": 180, "readingMinutes": 8,
+          "content": [
+            "Sent to Lagos to marry Nnaife, a man she has never met who washes clothes for a British family, Nnu Ego is at first appalled by him and by the cramped city life.",
+            "She bears many children and works endlessly to feed them as Nnaife's income rises and falls with the colonial economy and the Second World War, which takes him away.",
+            "Emecheta shows how old obligations survive in the new city while their protections do not. Nnu Ego carries the duties of a traditional wife without the support that once came with them."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "The Joys of Motherhood", "isFree": false, "priceSats": 180, "readingMinutes": 7,
+          "content": [
+            "Nnu Ego sacrifices everything to educate her sons, expecting them to care for her in old age. They succeed and leave, one for America and one for Canada, and send little back.",
+            "She returns to Ibuza and dies alone by the roadside. Her children give her a grand funeral, a final irony after a life of being taken for granted.",
+            "The ending asks who benefits from the ideal of the self-sacrificing mother, and leaves readers to decide whether Nnu Ego was failed by her children or by the world that taught her what to want."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "woman-at-point-zero",
+      "title": "Woman at Point Zero",
+      "subtitle": "A novel",
+      "authorNpub": "npub1fjfzmgpw9pzghxcurp0lsqay9y7sys0dwalcy7jzvyf4sngq7rl3xdljja",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-25",
+      "featured": false,
+      "tags": ["feminism", "african literature", "egypt", "translated"],
+      "description": "Awaiting execution in a Cairo prison, Firdaus tells a psychiatrist the story of her life. Based on a woman El Saadawi met while researching women's prisons. A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#3A0E14", "to": "#0E0405", "accent": "#F2D16B", "motif": "sun" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "The Prisoner", "isFree": true, "priceSats": 0, "readingMinutes": 5,
+          "content": [
+            "A psychiatrist studying women in Qanatir prison hears about a prisoner who has been sentenced to death and refuses every visitor. Her name is Firdaus.",
+            "When Firdaus finally agrees to speak, she does so without fear, and the narrator is unsettled by her calm. The rest of the book is Firdaus's own account.",
+            "El Saadawi frames the story as testimony. We are asked to listen, not to judge, and to notice who is usually allowed to tell their story."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Girlhood and Marriage", "isFree": false, "priceSats": 170, "readingMinutes": 7,
+          "content": [
+            "Firdaus grows up poor in a village where her body is controlled by others from childhood. After her parents die, she lives with an uncle who sends her to school but later marries her off to a much older man.",
+            "The marriage is cruel and she runs away. Each refuge she finds turns out to have a price, and each man who offers help expects something in return.",
+            "El Saadawi, a doctor, writes plainly about violence that society prefers to keep hidden, refusing to soften it."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Point Zero", "isFree": false, "priceSats": 170, "readingMinutes": 7,
+          "content": [
+            "Firdaus comes to see that in a world that sells women anyway, setting her own price is a form of freedom. When a pimp tries to take that control from her, she kills him.",
+            "She refuses to appeal for a pardon. To her, the truth she has spoken matters more than a life lived on others' terms.",
+            "The point zero of the title is the place where nothing more can be taken from her. The novel leaves readers with her fearlessness and with the system she exposed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "changes-a-love-story",
+      "title": "Changes: A Love Story",
+      "subtitle": "A novel",
+      "authorNpub": "npub1aa8vn97pjayu3cddy9fshg38hwllep2qluenf6kc584q54e8vqjshyecyh",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-23",
+      "featured": false,
+      "tags": ["feminism", "african literature", "ghana", "marriage"],
+      "description": "Esi, a successful statistician in Accra, leaves her husband and falls in love with a man who already has a wife. A sharp, warm novel about whether modern African women can have love and freedom at once. Winner of the 1992 Commonwealth Writers' Prize (Africa). A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#123A3A", "to": "#041010", "accent": "#F28A5A", "motif": "wave" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Leaving Oko", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "Esi Sekyi works for the government statistics office in Accra and loves her job. Her husband, Oko, resents how much of her it takes and wants more children and more attention.",
+            "After he forces himself on her one morning, Esi decides to leave the marriage, a choice her family and friends struggle to understand, partly because they have no word for what he did.",
+            "Aidoo's tone is light and ironic even when the subject is serious, and the comedy makes the injustice easier to see."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Ali", "isFree": false, "priceSats": 160, "readingMinutes": 7,
+          "content": [
+            "Esi meets Ali Kondey, a charming businessman who runs a travel agency. He is already married, and in his tradition he may take another wife.",
+            "Esi agrees to become his second wife, believing that a polygamous marriage might give her love without the constant demands of a full-time husband.",
+            "Aidoo uses the arrangement to test every assumption about tradition and modernity, and shows how both can serve men's convenience."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "Changes", "isFree": false, "priceSats": 160, "readingMinutes": 7,
+          "content": [
+            "The marriage slowly disappoints. Ali's visits become rarer, his gifts replace his presence, and Esi realises she is lonely in a new way.",
+            "Through the stories of her friend Opokuya and of the older women in her family, the novel shows the different compromises women have made and what each one cost.",
+            "Esi ends the novel unsure but unbroken. The changes of the title are hers to keep making, and Aidoo refuses to tie them up neatly."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "efuru",
+      "title": "Efuru",
+      "subtitle": "A novel",
+      "authorNpub": "npub1m3r3xrjf03m5vhmped9r6ugjlrg2764jnsse0n7e822ydlwu4umgv09t49",
+      "category": "Feminism",
+      "language": "English",
+      "publishedAt": "2026-09-21",
+      "featured": false,
+      "tags": ["feminism", "african literature", "nigeria", "igbo"],
+      "description": "Efuru is beautiful, respected and a gifted trader, yet her village measures her by her marriages and her children. One of the first novels published by a Nigerian woman in English (1966). A reading companion to the novel, chapter by chapter.",
+      "cover": { "from": "#0E2A3A", "to": "#040A10", "accent": "#7AD0E8", "motif": "wave" },
+      "chapters": [
+        {
+          "id": "ch-1", "number": 1, "title": "Adizua", "isFree": true, "priceSats": 0, "readingMinutes": 6,
+          "content": [
+            "Efuru, the daughter of a respected man, chooses her own husband, Adizua, and moves in with him before he can pay the bride price, a bold beginning in her Igbo lakeside town.",
+            "She proves a far better trader than her husband, and the couple prosper. Nwapa fills the story with the voices of neighbours, whose gossip forms a chorus around Efuru's life.",
+            "Their daughter, Ogonim, is born, but Adizua drifts away and eventually abandons them."
+          ]
+        },
+        {
+          "id": "ch-2", "number": 2, "title": "Gilbert", "isFree": false, "priceSats": 150, "readingMinutes": 7,
+          "content": [
+            "After Ogonim's death, Efuru returns to her father's house and later marries Gilbert, an educated man who seems kinder and more modern.",
+            "The marriage is happy at first, but the couple have no children, and the pressure of the community slowly turns Gilbert away from her.",
+            "Nwapa shows how women's economic power and personal worth count for little in a society that values a wife chiefly for her fertility."
+          ]
+        },
+        {
+          "id": "ch-3", "number": 3, "title": "The Woman of the Lake", "isFree": false, "priceSats": 150, "readingMinutes": 6,
+          "content": [
+            "Efuru is chosen to worship Uhamiri, the goddess of the lake, who is beautiful and wealthy and has never had children.",
+            "When a false accusation finally ends her second marriage, she turns towards the goddess and a life defined on her own terms.",
+            "The closing question is the novel's lasting challenge: if the goddess is honoured without ever having been a mother, why should women who share her fate be pitied?"
+          ]
+        }
+      ]
+    }
+  ],
+  "income": []
+}

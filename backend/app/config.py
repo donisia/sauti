@@ -31,6 +31,28 @@ class Config:
     LIGHTNING_PROVIDER = os.getenv("LIGHTNING_PROVIDER", "mock")
     INVOICE_TTL_SECONDS = int(os.getenv("INVOICE_TTL_SECONDS", "600"))
 
+    # M-Pesa (Safaricom Daraja STK Push). "mock" needs no credentials.
+    MPESA_PROVIDER = os.getenv("MPESA_PROVIDER", "mock")  # mock | daraja
+    MPESA_ENV = os.getenv("MPESA_ENV", "sandbox")  # sandbox | production
+    MPESA_CONSUMER_KEY = os.getenv("MPESA_CONSUMER_KEY", "")
+    MPESA_CONSUMER_SECRET = os.getenv("MPESA_CONSUMER_SECRET", "")
+    MPESA_SHORTCODE = os.getenv("MPESA_SHORTCODE", "174379")  # Daraja sandbox paybill
+    MPESA_PASSKEY = os.getenv("MPESA_PASSKEY", "")
+    MPESA_TRANSACTION_TYPE = os.getenv("MPESA_TRANSACTION_TYPE", "CustomerPayBillOnline")
+    # Public HTTPS URL Daraja posts results to, e.g. https://api.example.com/api/mpesa/callback?token=…
+    MPESA_CALLBACK_URL = os.getenv("MPESA_CALLBACK_URL", "")
+    # If set, callbacks must carry ?token=<value>; put the same token in MPESA_CALLBACK_URL.
+    MPESA_CALLBACK_TOKEN = os.getenv("MPESA_CALLBACK_TOKEN", "")
+    MPESA_TTL_SECONDS = int(os.getenv("MPESA_TTL_SECONDS", "180"))
+    # Don't hit the STK query API more often than this per payment while polling.
+    MPESA_QUERY_INTERVAL_SECONDS = int(os.getenv("MPESA_QUERY_INTERVAL_SECONDS", "10"))
+    # Prices are set in sats; M-Pesa charges the KES equivalent (rounded up, min KES 1).
+    KES_PER_SAT = float(os.getenv("KES_PER_SAT", "0.13"))
+
+    # Monthly subscriptions unlock every paid chapter by one author.
+    SUBSCRIPTION_DAYS = int(os.getenv("SUBSCRIPTION_DAYS", "30"))
+    DEFAULT_SUBSCRIPTION_SATS = int(os.getenv("DEFAULT_SUBSCRIPTION_SATS", "3000"))
+
     # Demo mode enables the payment simulator and the reader lock/unlock toggle,
     # and accepts unsigned "simulated" events — but only for DEMO_PUBKEY.
     DEMO_MODE = _bool("DEMO_MODE", True)

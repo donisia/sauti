@@ -5,19 +5,27 @@ from sqlalchemy import String, cast, or_
 
 from . import api
 from ..extensions import db
-from ..models import Author, Book, Chapter, Unlock
+from ..entitlements import reader_owns_chapter
+from ..models import Author, Book, Chapter
 from ..security import ApiError
 from ..serializers import author_full, book_detail, book_summary, chapter_read
 
-CATEGORIES = ["Fiction", "Non-fiction", "Politics", "History", "Culture", "Technology", "Poetry"]
+CATEGORIES = ["Fiction", "Feminism", "Non-fiction", "Politics", "History", "Culture", "Technology", "Poetry"]
 
 
 @api.get("/health")
 def health():
+    config = current_app.config
     return jsonify(
         status="ok",
-        lightningProvider=current_app.config["LIGHTNING_PROVIDER"],
-        demoMode=current_app.config["DEMO_MODE"],
+        lightningProvider=config["LIGHTNING_PROVIDER"],
+        demoMode=config["DEMO_MODE"],
+        payments={
+            "methods": ["lightning", "mpesa"],
+            "kesPerSat": config["KES_PER_SAT"],
+            "mpesaProvider": config["MPESA_PROVIDER"],
+            "subscriptionDays": config["SUBSCRIPTION_DAYS"],
+        },
     )
 
 
@@ -75,11 +83,7 @@ def read_chapter(book_id, chapter_slug):
     if not chapter:
         raise ApiError("Chapter not found.", 404, "not_found")
 
-    unlocked = chapter.is_free
-    reader = request.headers.get("X-Reader-Id")
-    if not unlocked and reader:
-        unlocked = Unlock.query.filter_by(reader_id=reader, chapter_id=chapter.id).first() is not None
-
+    unlocked = reader_owns_chapter(request.headers.get("X-Reader-Id"), chapter)
     return jsonify(chapter_read(chapter, unlocked))
 
 

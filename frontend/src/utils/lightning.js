@@ -13,6 +13,11 @@ export function formatSats(value) {
   return numberFormat.format(Math.round(value || 0));
 }
 
+/** KES equivalent the server will charge over M-Pesa (rounded up, minimum KES 1). */
+export const satsToKes = (sats, kesPerSat) => Math.max(1, Math.ceil(sats * kesPerSat));
+
+export const formatKes = (value) => `KES ${numberFormat.format(Math.round(value || 0))}`;
+
 /** Build a BOLT11-shaped string. 1 sat = 10 nano-BTC, hence the "n" multiplier. */
 export function createMockInvoice(sats) {
   const bytes = crypto.getRandomValues(new Uint8Array(190));

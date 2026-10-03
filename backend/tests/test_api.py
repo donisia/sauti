@@ -8,8 +8,12 @@ def test_health(client):
 
 def test_list_and_filter_books(client):
     all_books = client.get("/api/books").get_json()
-    assert len(all_books["books"]) == 8
-    assert all_books["categoryCounts"]["Fiction"] == 2
+    assert len(all_books["books"]) == 20
+    assert all_books["categoryCounts"]["Fiction"] == 3
+    assert all_books["categoryCounts"]["Feminism"] == 7
+
+    covered = {b["id"]: b["coverUrl"] for b in all_books["books"] if b["coverUrl"]}
+    assert covered["burgers-daughter"] == "/covers/burgers-daughter.png" and len(covered) == 5
 
     poetry = client.get("/api/books?category=Poetry").get_json()["books"]
     assert [b["id"] for b in poetry] == ["small-hours"]
@@ -144,9 +148,10 @@ def test_author_publishes_book_and_paid_chapter(client, signer, reader_headers):
     assert chapter.status_code == 201
     assert chapter.get_json()["chapter"]["priceSats"] == 500
 
-    # Readers see only the preview; the dashboard reflects the catalogue.
+    # Readers see only the preview (at most half of a short chapter); the
+    # dashboard reflects the catalogue.
     read = client.get(f"/api/books/{book['id']}/chapters/ch-1", headers=reader_headers).get_json()
-    assert read["unlocked"] is False and len(read["paragraphs"]) == 2
+    assert read["unlocked"] is False and len(read["paragraphs"]) == 1
 
     auth = {"Authorization": signer.auth_header("GET", "/api/me/dashboard")}
     dashboard = client.get("/api/me/dashboard", headers=auth).get_json()

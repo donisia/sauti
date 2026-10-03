@@ -3,7 +3,7 @@
 import re
 from datetime import datetime, timedelta, timezone
 
-from flask import g, jsonify, request
+from flask import current_app, g, jsonify, request
 
 from . import api
 from .catalogue import CATEGORIES
@@ -11,7 +11,7 @@ from ..extensions import db
 from ..models import Author, Book, Chapter, Invoice, utcnow
 from ..nostr import hex_to_npub
 from ..security import ApiError, require_nostr_auth
-from ..serializers import author_full, book_detail, book_summary, chapter_meta, income_entry
+from ..serializers import author_full, book_detail, book_summary, chapter_meta, earnings_filter, income_entry
 
 DEFAULT_COVER = {"from": "#3A2414", "to": "#0F1012", "accent": "#F7931A", "motif": "sun"}
 _URL = re.compile(r"^https?://\S+$", re.IGNORECASE)
@@ -25,7 +25,13 @@ def _current_author(create=False):
     author = db.session.get(Author, g.pubkey)
     if not author and create:
         npub = hex_to_npub(g.pubkey)
-        author = Author(pubkey=g.pubkey, npub=npub, name="Anonymous Author", initials="✦")
+        author = Author(
+            pubkey=g.pubkey,
+            npub=npub,
+            name="Anonymous Author",
+            initials="✦",
+            subscription_price_sats=current_app.config["DEFAULT_SUBSCRIPTION_SATS"],
+        )
         db.session.add(author)
     return author
 
@@ -168,19 +174,20 @@ def dashboard():
             author=None,
             npub=hex_to_npub(g.pubkey),
             books=[],
-            stats={"books": 0, "chapters": 0, "paidReaders": 0, "satsEarned": 0, "satsToday": 0, "satsWeek": 0},
+            stats={
+                "books": 0,
+                "chapters": 0,
+                "paidReaders": 0,
+                "satsEarned": 0,
+                "subscribers": 0,
+                "satsToday": 0,
+                "satsWeek": 0,
+            },
             weekly=[],
             income=[],
         )
 
-    chapter_ids = [c.id for b in author.books for c in b.chapters]
-    paid = (
-        Invoice.query.filter(Invoice.chapter_id.in_(chapter_ids), Invoice.status == "paid")
-        .order_by(Invoice.paid_at.desc())
-        .all()
-        if chapter_ids
-        else []
-    )
+    paid = Invoice.query.filter(earnings_filter(author)).order_by(Invoice.paid_at.desc()).all()
 
     now = utcnow()
     today = now.date()

@@ -3,11 +3,11 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FlashMessage from '../common/FlashMessage';
-import LightningModal from '../modals/LightningModal';
+import PaymentModal from '../modals/PaymentModal';
 
 /**
  * App shell. `minimal` hides global chrome for the distraction-free reader,
- * while keeping flash messages and the Lightning modal available everywhere.
+ * while keeping flash messages and the payment modal available everywhere.
  */
 export default function Layout({ minimal = false }) {
   const { pathname } = useLocation();
@@ -34,7 +34,7 @@ export default function Layout({ minimal = false }) {
       {!minimal && <Footer />}
 
       <FlashMessage />
-      <LightningModal />
+      <PaymentModal />
     </div>
   );
 }

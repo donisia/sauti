@@ -130,7 +130,7 @@ export default function Navbar() {
         scrolled || menuOpen ? 'border-line/80 bg-ink/85 backdrop-blur-xl' : 'border-transparent bg-ink/40 backdrop-blur-sm'
       }`}
     >
-      <nav className="container-page flex h-16 items-center justify-between gap-4" aria-label="Primary">
+      <nav className="container-wide flex h-16 items-center justify-between gap-4" aria-label="Primary">
         <Logo />
 
         <div className="hidden items-center gap-1 md:flex">

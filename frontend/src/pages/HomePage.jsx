@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Feather, KeyRound, PenLine, Radio, Unlock, Zap } from 'lucide-react';
+import { ArrowRight, BookOpen, Feather, KeyRound, PenLine, Radio, Smartphone, Unlock, Zap } from 'lucide-react';
 import BookCard, { BookCardSkeleton } from '../components/common/BookCard';
 import BookCover from '../components/common/BookCover';
 import { useApi } from '../hooks/useApi';
@@ -16,7 +16,7 @@ const FEATURES = [
   {
     icon: Zap,
     title: 'Earn Directly',
-    body: 'Price each chapter in sats. Readers pay over Lightning and the money settles in your wallet in seconds — no payout thresholds, no 30-day holds, no middleman.',
+    body: 'Price each chapter in sats, or offer a monthly subscription to everything you write. Readers pay over Lightning or with M-Pesa — no payout thresholds, no 30-day holds, no middleman.',
   },
   {
     icon: KeyRound,
@@ -29,7 +29,7 @@ const STEPS = [
   { icon: KeyRound, title: 'Connect your key', body: 'Sign in with a NIP-07 extension like Alby or nos2x. We only ever see your public key.' },
   { icon: PenLine, title: 'Write & sign', body: 'Draft your book and chapters, then sign the public metadata with your Nostr key.' },
   { icon: Radio, title: 'Broadcast to relays', body: 'Metadata is published to multiple relays, so your work stays discoverable across the network.' },
-  { icon: Unlock, title: 'Readers unlock', body: 'Free chapters hook readers in. Paid chapters unlock instantly with a Lightning micropayment.' },
+  { icon: Unlock, title: 'Readers unlock', body: 'Free chapters hook readers in. Paid chapters unlock with Lightning or M-Pesa, or with a monthly subscription to the author.' },
 ];
 
 /** Overlapping cover composition for the hero; falls back to the first featured titles. */
@@ -37,29 +37,29 @@ function HeroCovers({ books }) {
   const preferred = HERO_IDS.map((id) => books.find((b) => b.id === id)).filter(Boolean);
   const [left, center, right] = preferred.length === 3 ? preferred : books.slice(0, 3);
   return (
-    <div className="relative mx-auto h-[360px] w-full max-w-[440px] sm:h-[460px]">
+    <div className="relative mx-auto aspect-[10/9] w-full max-w-[680px]">
       {left && (
-        <div className="absolute left-0 top-12 w-[38%] -rotate-[8deg] opacity-80 transition duration-700 hover:rotate-[-4deg] sm:top-16">
-          <BookCover book={left} size="sm" />
+        <div className="absolute left-[2%] top-[11%] w-[34%] -rotate-[8deg] opacity-80 transition duration-700 hover:rotate-[-4deg]">
+          <BookCover book={left} size="md" />
         </div>
       )}
       {right && (
-        <div className="absolute right-0 top-12 w-[38%] rotate-[8deg] opacity-80 transition duration-700 hover:rotate-[4deg] sm:top-16">
-          <BookCover book={right} size="sm" />
+        <div className="absolute right-[2%] top-[11%] w-[34%] rotate-[8deg] opacity-80 transition duration-700 hover:rotate-[4deg]">
+          <BookCover book={right} size="md" />
         </div>
       )}
-      <div className="absolute left-1/2 top-0 w-[50%] -translate-x-1/2">
+      <div className="absolute left-1/2 top-0 w-[48%] -translate-x-1/2">
         <div className="animate-float">
           {center ? (
-            <BookCover book={center} size="md" className="shadow-glow-soft" />
+            <BookCover book={center} size="lg" className="shadow-glow-soft" />
           ) : (
             <div className="aspect-[2/3] animate-pulse rounded-lg bg-card" />
           )}
         </div>
       </div>
 
-      {/* Floating payment receipt */}
-      <div className="absolute bottom-2 left-1/2 w-[260px] -translate-x-1/2 sm:bottom-6">
+      {/* Floating payment receipts */}
+      <div className="absolute bottom-[14%] left-0 w-[250px] sm:w-[270px]">
         <div className="flex animate-fade-up items-center gap-3 rounded-2xl border border-line bg-surface/90 p-3.5 shadow-card backdrop-blur-xl [animation-delay:400ms]">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-btc/15 text-btc">
             <Zap className="h-4 w-4" fill="currentColor" />
@@ -71,6 +71,18 @@ function HeroCovers({ books }) {
           <span className="font-mono text-sm text-btc">+210</span>
         </div>
       </div>
+      <div className="absolute bottom-0 right-0 hidden w-[270px] sm:block">
+        <div className="flex animate-fade-up items-center gap-3 rounded-2xl border border-emerald-400/20 bg-surface/90 p-3.5 shadow-card backdrop-blur-xl [animation-delay:700ms]">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-300">
+            <Smartphone className="h-4 w-4" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-xs font-medium text-cream">Monthly subscription</p>
+            <p className="truncate text-[11px] text-cream-faint">Paid with M-Pesa · 30 days</p>
+          </div>
+          <span className="font-mono text-sm text-emerald-300">KES 520</span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -78,7 +90,7 @@ function HeroCovers({ books }) {
 export default function HomePage() {
   const { data, error, loading } = useApi((signal) => api.listBooks({ featured: 1 }, { signal }), []);
   const featuredBooks = data?.books ?? [];
-  const featured = featuredBooks.slice(0, 4);
+  const featured = featuredBooks.slice(0, 5);
 
   return (
     <>
@@ -87,17 +99,18 @@ export default function HomePage() {
         <div className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-btc/10 blur-[120px]" />
         <div className="pointer-events-none absolute -left-40 top-40 h-[360px] w-[360px] rounded-full bg-violet-500/5 blur-[120px]" />
 
-        <div className="container-page relative grid items-center gap-14 pb-20 pt-12 sm:pt-20 lg:grid-cols-12 lg:pb-28 lg:pt-24">
-          <div className="animate-fade-up lg:col-span-7">
-            <p className="eyebrow">Nostr identity · Lightning payments</p>
-            <h1 className="mt-6 font-display text-[44px] font-semibold leading-[1.03] tracking-tight text-cream sm:text-6xl lg:text-7xl">
+        <div className="container-wide relative grid items-center gap-14 pb-20 pt-12 sm:pt-16 lg:min-h-[calc(100dvh-4rem)] lg:grid-cols-2 lg:gap-16 lg:py-16 xl:gap-24">
+          <div className="animate-fade-up">
+            <p className="eyebrow">Nostr identity · Lightning &amp; M-Pesa payments</p>
+            <h1 className="mt-6 font-display text-[48px] font-semibold leading-[1.02] tracking-tight text-cream sm:text-7xl xl:text-8xl 2xl:text-[112px]">
               Publish freely.
               <br />
               <span className="italic text-btc">Earn directly.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream-muted">
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-cream-muted sm:text-xl">
               Sovereign Publishing gives independent authors a home that no platform can take away. Sign your work with a
-              Nostr key, publish to open relays, and get paid per chapter in sats over the Lightning Network.
+              Nostr key, publish to open relays, and get paid per chapter or through monthly subscriptions in sats over
+              Lightning or with M-Pesa.
             </p>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -109,10 +122,11 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-line pt-8">
+            <dl className="mt-14 grid max-w-2xl grid-cols-2 gap-6 border-t border-line pt-8 sm:grid-cols-4">
               {[
                 ['Per chapter', 'Pricing'],
-                ['~1 sec', 'Settlement'],
+                ['Monthly', 'Subscriptions'],
+                ['Sats or KES', 'Pay with'],
                 ['Your keys', 'Your identity'],
               ].map(([value, label]) => (
                 <div key={label}>
@@ -123,7 +137,7 @@ export default function HomePage() {
             </dl>
           </div>
 
-          <div className="lg:col-span-5">
+          <div>
             <HeroCovers books={featuredBooks} />
           </div>
         </div>
@@ -131,7 +145,7 @@ export default function HomePage() {
 
       {/* ---------------------------- Features ---------------------------- */}
       <section className="border-y border-line/70 bg-surface/40">
-        <div className="container-page py-20 sm:py-24">
+        <div className="container-wide py-20 sm:py-24">
           <div className="max-w-2xl">
             <p className="eyebrow">Why Sovereign Publishing</p>
             <h2 className="mt-4 font-display text-3xl leading-tight text-cream sm:text-5xl">
@@ -154,7 +168,7 @@ export default function HomePage() {
       </section>
 
       {/* ------------------------- Featured books ------------------------- */}
-      <section className="container-page py-20 sm:py-24">
+      <section className="container-wide py-20 sm:py-24">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow">From the library</p>
@@ -168,16 +182,16 @@ export default function HomePage() {
         {error ? (
           <p className="mt-12 rounded-2xl border border-red-400/25 bg-red-400/[0.06] p-5 text-sm text-cream-muted">{error.message}</p>
         ) : (
-          <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-5 lg:gap-x-6">
             {loading && !data
-              ? Array.from({ length: 4 }, (_, i) => <BookCardSkeleton key={i} />)
+              ? Array.from({ length: 5 }, (_, i) => <BookCardSkeleton key={i} />)
               : featured.map((book) => <BookCard key={book.id} book={book} />)}
           </div>
         )}
       </section>
 
       {/* -------------------------- How it works -------------------------- */}
-      <section className="container-page pb-20 sm:pb-24">
+      <section className="container-wide pb-20 sm:pb-24">
         <div className="panel overflow-hidden p-7 sm:p-12">
           <div className="max-w-2xl">
             <p className="eyebrow">How it works</p>
@@ -208,7 +222,7 @@ export default function HomePage() {
       </section>
 
       {/* --------------------------- Author CTA --------------------------- */}
-      <section className="container-page">
+      <section className="container-wide">
         <div className="relative overflow-hidden rounded-3xl border border-btc/25 bg-gradient-to-br from-[#2A1B0C] via-surface to-ink px-7 py-14 sm:px-14 sm:py-20">
           <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-btc/20 blur-[100px]" />
           <div className="relative grid items-center gap-10 lg:grid-cols-[1fr_auto]">

@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 from flask import Flask, jsonify
+from sqlalchemy import inspect
 from werkzeug.exceptions import HTTPException
 
 from .config import BASE_DIR, Config
@@ -30,12 +31,34 @@ def create_app(config_class=Config):
 
     with app.app_context():
         db.create_all()
-        if app.config["SEED_ON_START"] and not db.session.query(models.Author).first():
+        problem = _schema_problem()
+        if problem:
+            app.logger.error(problem)
+
+            @app.before_request
+            def _outdated_schema():
+                return jsonify(error={"code": "outdated_database", "message": problem}), 500
+
+        elif app.config["SEED_ON_START"] and not db.session.query(models.Author).first():
             from .seed import seed_database
 
             seed_database()
 
     return app
+
+
+def _schema_problem():
+    """create_all() doesn't add columns to existing tables, so detect an outdated database."""
+    inspector = inspect(db.engine)
+    for table in db.metadata.sorted_tables:
+        existing = {c["name"] for c in inspector.get_columns(table.name)}
+        missing = [c.name for c in table.columns if c.name not in existing]
+        if missing:
+            return (
+                f"Database table '{table.name}' is missing columns {missing}. "
+                "Recreate the dev database with:  flask --app run seed --reset"
+            )
+    return None
 
 
 def _register_errors(app):

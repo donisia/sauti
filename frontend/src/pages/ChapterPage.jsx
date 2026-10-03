@@ -75,7 +75,7 @@ function DemoToggle({ book, chapter, unlocked }) {
 
 export default function ChapterPage() {
   const { id, chapterId } = useParams();
-  const { isUnlocked, openPayment } = useLightning();
+  const { isUnlocked, openPayment, openSubscription, entitlementKey } = useLightning();
   const progress = useScrollProgress();
   const [sizeIndex, setSizeIndex] = useState(() => Number(localStorage.getItem(TEXT_SIZE_KEY) ?? 1));
 
@@ -83,10 +83,12 @@ export default function ChapterPage() {
     localStorage.setItem(TEXT_SIZE_KEY, String(sizeIndex));
   }, [sizeIndex]);
 
-  // Re-fetch when this browser gains or loses the chapter, so the server can
-  // send the full text (or only the preview) accordingly.
-  const owned = isUnlocked({ id }, { id: chapterId });
-  const { data, error, loading, reload } = useApi((signal) => api.getChapter(id, chapterId, { signal }), [id, chapterId, owned]);
+  // Re-fetch when this browser gains or loses access (a chapter unlock or an
+  // author subscription), so the server sends the full text or only the preview.
+  const { data, error, loading, reload } = useApi(
+    (signal) => api.getChapter(id, chapterId, { signal }),
+    [id, chapterId, entitlementKey],
+  );
 
   const stale = data && (data.book.id !== id || data.chapter.id !== chapterId);
   if (loading && (!data || stale)) return <PageLoading label="Opening chapter…" />;
@@ -176,9 +178,11 @@ export default function ChapterPage() {
           <LockedChapterOverlay
             key="locked"
             chapter={chapter}
+            author={author}
             paragraphs={paragraphs}
             format={book.format}
             onUnlock={() => openPayment(book, chapter)}
+            onSubscribe={() => openSubscription(author, { book, chapter })}
           />
         )}
 

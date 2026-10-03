@@ -8,6 +8,7 @@ const COLUMNS = [
     links: [
       { to: '/explore', label: 'Explore books' },
       { to: '/explore?category=Fiction', label: 'Fiction' },
+      { to: '/explore?category=Feminism', label: 'Feminism' },
       { to: '/explore?category=Poetry', label: 'Poetry' },
       { to: '/explore?category=Technology', label: 'Technology' },
     ],
@@ -32,7 +33,7 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer className="mt-24 border-t border-line/80 bg-ink-deep">
-      <div className="container-page grid gap-12 py-14 md:grid-cols-12">
+      <div className="container-wide grid gap-12 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream-muted">
@@ -68,7 +69,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-line/60">
-        <div className="container-page flex flex-col gap-2 py-6 text-xs text-cream-faint sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-wide flex flex-col gap-2 py-6 text-xs text-cream-faint sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Sovereign Publishing · Hackathon demo build</p>
           <p className="font-mono">Signed with Nostr · Settled in sats</p>
         </div>

@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import secrets
 from datetime import datetime, timedelta
 
@@ -9,9 +10,14 @@ from flask import current_app
 
 from .config import BASE_DIR
 from .extensions import db
-from .models import Author, Book, Chapter, Invoice, Unlock, utcnow
+from .models import Author, Book, Chapter, Invoice, Subscription, Unlock, utcnow
 
-SEED_FILE = BASE_DIR / "seeds" / "catalogue.json"
+SEED_FILES = [BASE_DIR / "seeds" / "catalogue.json", BASE_DIR / "seeds" / "african_literature.json"]
+
+# Monthly subscription price per seed author, in catalogue order.
+SUBSCRIPTION_PRICES = [4000, 3500, 2000, 5000]
+# (author index, reader id, hours ago)
+SEED_SUBSCRIBERS = [(0, "rdr_seed_mpesa_000001", 3.5), (3, "rdr_seed_mpesa_000002", 27), (3, "rdr_seed_mpesa_000003", 50)]
 
 
 def _fake_pubkey(npub):
@@ -19,8 +25,17 @@ def _fake_pubkey(npub):
     return hashlib.sha256(npub.encode()).hexdigest()
 
 
+def _load_seed_data():
+    data = {"authors": [], "books": [], "income": []}
+    for path in SEED_FILES:
+        chunk = json.loads(path.read_text(encoding="utf-8"))
+        for key in data:
+            data[key].extend(chunk.get(key, []))
+    return data
+
+
 def seed_database():
-    data = json.loads(SEED_FILE.read_text(encoding="utf-8"))
+    data = _load_seed_data()
     config = current_app.config
     now = utcnow()
 
@@ -39,7 +54,7 @@ def seed_database():
     )
 
     pubkeys = {}
-    for a in data["authors"]:
+    for index, a in enumerate(data["authors"]):
         pubkeys[a["npub"]] = _fake_pubkey(a["npub"])
         db.session.add(
             Author(
@@ -51,6 +66,7 @@ def seed_database():
                 location=a["location"],
                 lightning_address=a["lightningAddress"],
                 avatar_hue=a["avatarHue"],
+                subscription_price_sats=SUBSCRIPTION_PRICES[index % len(SUBSCRIPTION_PRICES)],
                 joined_at=datetime.fromisoformat(a["joined"]),
             )
         )
@@ -69,6 +85,7 @@ def seed_database():
             description=b["description"],
             tags=b.get("tags", []),
             cover=b.get("cover"),
+            cover_url=b.get("coverUrl"),
             featured=b.get("featured", False),
             nostr_event_id=b.get("nostrEventId"),
             published_at=published,
@@ -111,5 +128,43 @@ def seed_database():
             Unlock(reader_id=entry["reader"], chapter_id=chapter.id, invoice_hash=payment_hash, created_at=paid_at)
         )
 
+    # A few monthly subscribers who paid with M-Pesa.
+    for npub_index, reader, hours_ago in SEED_SUBSCRIBERS:
+        author_pubkey = pubkeys[data["authors"][npub_index]["npub"]]
+        sats = SUBSCRIPTION_PRICES[npub_index % len(SUBSCRIPTION_PRICES)]
+        paid_at = now - timedelta(hours=hours_ago)
+        payment_hash = secrets.token_hex(32)
+        db.session.add(
+            Invoice(
+                payment_hash=payment_hash,
+                method="mpesa",
+                purpose="subscription",
+                author_pubkey=author_pubkey,
+                reader_id=reader,
+                amount_sats=sats,
+                amount_kes=max(1, math.ceil(sats * config["KES_PER_SAT"])),
+                phone="254700000000",
+                provider_ref=f"ws_CO_seed{payment_hash[:16]}",
+                receipt=f"S{payment_hash[:9].upper()}",
+                status="paid",
+                created_at=paid_at - timedelta(seconds=30),
+                expires_at=paid_at + timedelta(minutes=3),
+                paid_at=paid_at,
+            )
+        )
+        db.session.add(
+            Subscription(
+                reader_id=reader,
+                author_pubkey=author_pubkey,
+                invoice_hash=payment_hash,
+                started_at=paid_at,
+                expires_at=paid_at + timedelta(days=config["SUBSCRIPTION_DAYS"]),
+            )
+        )
+
     db.session.commit()
-    return {"authors": len(data["authors"]) + 1, "books": len(data["books"]), "payments": len(data["income"])}
+    return {
+        "authors": len(data["authors"]) + 1,
+        "books": len(data["books"]),
+        "payments": len(data["income"]) + len(SEED_SUBSCRIBERS),
+    }
