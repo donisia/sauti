@@ -46,3 +46,4 @@ export function buildQrMatrix(seed, size = 29) {
     Array.from({ length: n }, (_, c) => Boolean(qr.modules.get(r, c))),
   );
 }
+export function formatKes(value) { return 'KSh ' + new Intl.NumberFormat('en-US').format(Math.round(value || 0)); }
