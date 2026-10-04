@@ -1,32 +1,35 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { generateSecretKey, getPublicKey, finalizeEvent } from 'nostr-tools';
 import { useFlash } from '../hooks/useFlash';
-import { apiRequest, apiUrl } from '../utils/api';
-import {
-  DEFAULT_RELAYS,
-  KIND_HTTP_AUTH,
-  SIMULATED_IDENTITY,
-  hexToNpub,
-  publishToRelay,
-  randomHex,
-  serializeEvent,
-  sha256Hex,
-} from '../utils/nostr';
+import { DEFAULT_RELAYS, hexToNpub, publishToRelay } from '../utils/nostr';
 
 /**
  * Nostr identity & signing.
- *
- * SECURITY: this provider never asks for, stores, or derives a private key
- * (nsec). Real signing is delegated to a NIP-07 extension (Alby, nos2x,
- * Keys.band…). Without one, a clearly-labelled simulated identity is used.
+ * Modes:
+ *  - 'nip07' : a browser extension (Alby, nos2x) holds the key and signs.
+ *  - 'local' : the app creates a real key in this browser (no signup needed).
  */
 export const NostrContext = createContext(null);
 
 const STORAGE_KEY = 'sp:nostr-session';
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const LOCAL_KEY = 'sp:local-sk';
+
+const toHex = (bytes) => Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+const fromHex = (hex) => new Uint8Array(hex.match(/../g).map((h) => parseInt(h, 16)));
+
+function getLocalSecretKey() {
+  let hex = localStorage.getItem(LOCAL_KEY);
+  if (!hex) {
+    hex = toHex(generateSecretKey());
+    localStorage.setItem(LOCAL_KEY, hex);
+  }
+  return fromHex(hex);
+}
 
 function readSession() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return s?.mode === 'simulated' ? null : s; // drop old fake sessions
   } catch {
     return null;
   }
@@ -34,12 +37,10 @@ function readSession() {
 
 export function NostrProvider({ children }) {
   const flash = useFlash();
-  /** session: { pubkey: hex, npub, mode: 'nip07' | 'simulated' } | null */
   const [session, setSession] = useState(readSession);
   const [isConnecting, setIsConnecting] = useState(false);
   const [hasExtension, setHasExtension] = useState(() => typeof window !== 'undefined' && Boolean(window.nostr));
 
-  // Extensions inject window.nostr asynchronously, so poll briefly after mount.
   useEffect(() => {
     if (window.nostr) return undefined;
     let attempts = 0;
@@ -67,22 +68,21 @@ export function NostrProvider({ children }) {
         const pubkey = await window.nostr.getPublicKey();
         const next = { pubkey, npub: hexToNpub(pubkey), mode: 'nip07' };
         setSession(next);
-        flash.success('Your NIP-07 signer shared your public key. Your private key never left the extension.', {
+        flash.success('Your signer shared your public key. Your private key never left the extension.', {
           title: 'Nostr identity connected',
         });
         return next;
       }
 
-      await wait(500);
-      const next = { ...SIMULATED_IDENTITY, mode: 'simulated' };
+      const pubkey = getPublicKey(getLocalSecretKey());
+      const next = { pubkey, npub: hexToNpub(pubkey), mode: 'local' };
       setSession(next);
-      flash.warning('No NIP-07 extension found, so a simulated demo identity is being used.', {
-        title: 'Demo identity active',
-        duration: 6500,
+      flash.success('A new Nostr key was created in this browser. No email or phone number needed.', {
+        title: 'Pen name created',
       });
       return next;
     } catch (error) {
-      flash.error(error?.message || 'The signer declined the request.', { title: 'Connection failed' });
+      flash.error(error?.message || 'Could not connect.', { title: 'Connection failed' });
       return null;
     } finally {
       setIsConnecting(false);
@@ -94,39 +94,25 @@ export function NostrProvider({ children }) {
     flash.info('Your session was cleared from this browser.', { title: 'Disconnected' });
   }, [flash]);
 
-  /**
-   * Sign an event template ({ kind, tags, content }).
-   * Uses window.nostr.signEvent when available; otherwise returns a
-   * structurally valid event with a computed id and a placeholder signature.
-   */
   const signEvent = useCallback(
     async (template) => {
       if (!session) throw new Error('Connect a Nostr identity before signing.');
-      const unsigned = {
+      const base = {
         kind: template.kind ?? 1,
         created_at: Math.floor(Date.now() / 1000),
         tags: template.tags ?? [],
         content: template.content ?? '',
-        pubkey: session.pubkey,
       };
 
       if (session.mode === 'nip07' && window.nostr?.signEvent) {
-        return window.nostr.signEvent(unsigned);
+        return window.nostr.signEvent({ ...base, pubkey: session.pubkey });
       }
-
-      await wait(350);
-      const id = await sha256Hex(serializeEvent(unsigned));
-      return { ...unsigned, id, sig: randomHex(64), simulated: true };
+      return finalizeEvent(base, getLocalSecretKey());
     },
     [session],
   );
 
-  /** Broadcast a signed event. Simulated events never touch the network. */
   const publishEvent = useCallback(async (event, relayUrls = DEFAULT_RELAYS.map((r) => r.url)) => {
-    if (event.simulated) {
-      await wait(800);
-      return relayUrls.map((url) => ({ url, ok: true, simulated: true, message: 'simulated' }));
-    }
     return Promise.all(relayUrls.map((url) => publishToRelay(url, event).then((result) => ({ url, ...result }))));
   }, []);
 
@@ -139,35 +125,13 @@ export function NostrProvider({ children }) {
     [signEvent, publishEvent],
   );
 
-  /**
-   * Call an author-only API endpoint. Each request carries a fresh NIP-98
-   * event (kind 27235) signed for that exact URL and method, so the server
-   * learns who you are from a signature — never from a password or nsec.
-   */
-  const authRequest = useCallback(
-    async (path, options = {}) => {
-      const method = (options.method || 'GET').toUpperCase();
-      const event = await signEvent({
-        kind: KIND_HTTP_AUTH,
-        content: '',
-        tags: [
-          ['u', apiUrl(path)],
-          ['method', method],
-        ],
-      });
-      const token = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(event))));
-      return apiRequest(path, { ...options, method, headers: { ...options.headers, Authorization: `Nostr ${token}` } });
-    },
-    [signEvent],
-  );
-
   const value = useMemo(
     () => ({
       isConnected: Boolean(session),
       pubkey: session?.pubkey ?? null,
       npub: session?.npub ?? null,
       mode: session?.mode ?? null,
-      isSimulated: session?.mode === 'simulated',
+      isSimulated: false,
       hasExtension,
       isConnecting,
       relays: DEFAULT_RELAYS,
@@ -176,9 +140,8 @@ export function NostrProvider({ children }) {
       signEvent,
       publishEvent,
       signAndPublish,
-      authRequest,
     }),
-    [session, hasExtension, isConnecting, connect, disconnect, signEvent, publishEvent, signAndPublish, authRequest],
+    [session, hasExtension, isConnecting, connect, disconnect, signEvent, publishEvent, signAndPublish],
   );
 
   return <NostrContext.Provider value={value}>{children}</NostrContext.Provider>;
