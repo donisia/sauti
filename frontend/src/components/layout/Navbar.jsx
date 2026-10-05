@@ -18,7 +18,7 @@ const linkClass = ({ isActive }) =>
 
 /** Connect / identity pill with dropdown. Only ever handles public keys. */
 function IdentityButton({ onNavigate }) {
-  const { isConnected, isConnecting, npub, isSimulated, connect, disconnect } = useNostr();
+  const { isConnected, isConnecting, npub, isSimulated, mode, connect, disconnect } = useNostr();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -76,7 +76,7 @@ function IdentityButton({ onNavigate }) {
             <p className="text-[11px] uppercase tracking-[0.16em] text-cream-faint">Signed in as</p>
             <p className="mt-1 truncate font-mono text-xs text-cream">{shortenKey(npub, 14, 8)}</p>
             <p className={`mt-1.5 text-[11px] ${isSimulated ? 'text-amber-300' : 'text-emerald-300'}`}>
-              {isSimulated ? 'Simulated demo identity' : 'NIP-07 signer connected'}
+              {isSimulated ? 'Simulated demo identity' : mode === 'local' ? 'Pen name key created in this browser' : 'NIP-07 signer connected'}
             </p>
           </div>
           <div className="hairline my-1" />
@@ -130,7 +130,7 @@ export default function Navbar() {
         scrolled || menuOpen ? 'border-line/80 bg-ink/85 backdrop-blur-xl' : 'border-transparent bg-ink/40 backdrop-blur-sm'
       }`}
     >
-      <nav className="container-wide flex h-16 items-center justify-between gap-4" aria-label="Primary">
+      <nav className="container-page flex h-16 items-center justify-between gap-4" aria-label="Primary">
         <Logo />
 
         <div className="hidden items-center gap-1 md:flex">

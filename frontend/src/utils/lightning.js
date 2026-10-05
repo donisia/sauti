@@ -1,11 +1,14 @@
+import QRCode from 'qrcode';
+
 /**
- * Lightning helpers for the demo payment flow. Invoices and QR codes are
- * visually realistic mocks — they are not payable on the real network.
+ * Lightning helpers. Invoices come from the author's Lightning address (LNURL-pay)
+ * and payment is confirmed through the LNURL-verify link. Real payments.
  */
 
-const BECH32 = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
-
 export const INVOICE_TTL_SECONDS = 10 * 60;
+
+// Demo: every author's payments go to this Lightning address (Blink).
+const LNURL_CALLBACK = 'https://lnurl.blink.sv/lnurlp/blink.sv/behllytamar/invoice';
 
 const numberFormat = new Intl.NumberFormat('en-US');
 
@@ -13,58 +16,34 @@ export function formatSats(value) {
   return numberFormat.format(Math.round(value || 0));
 }
 
-/** KES equivalent the server will charge over M-Pesa (rounded up, minimum KES 1). */
-export const satsToKes = (sats, kesPerSat) => Math.max(1, Math.ceil(sats * kesPerSat));
+/** Ask the author's wallet for a real invoice. Returns { invoice, verifyUrl }. */
+export async function fetchInvoice(sats) {
+  const res = await fetch(`${LNURL_CALLBACK}?amount=${Math.round(sats) * 1000}`);
+  const data = await res.json();
+  if (!data.pr) throw new Error(data.reason || 'The wallet did not return an invoice.');
+  return { invoice: data.pr, verifyUrl: data.verify || null };
+}
 
-export const formatKes = (value) => `KES ${numberFormat.format(Math.round(value || 0))}`;
+/** True once the invoice has been paid. */
+export async function checkInvoicePaid(verifyUrl) {
+  if (!verifyUrl) return false;
+  const res = await fetch(verifyUrl);
+  const data = await res.json();
+  return data.settled === true;
+}
 
-/** Build a BOLT11-shaped string. 1 sat = 10 nano-BTC, hence the "n" multiplier. */
+/** Kept for compatibility with older imports. */
 export function createMockInvoice(sats) {
-  const bytes = crypto.getRandomValues(new Uint8Array(190));
-  const body = Array.from(bytes, (b) => BECH32[b % 32]).join('');
-  return `lnbc${sats * 10}n1p${body}`;
+  return `lnbc${sats * 10}n1pmock`;
 }
 
-/**
- * Deterministic QR-like module matrix derived from the invoice string.
- * Includes the three finder patterns and timing lines so it reads as a QR code.
- */
+/** A real, scannable QR code for the invoice, as a matrix of true/false modules. */
 export function buildQrMatrix(seed, size = 29) {
-  let state = 2166136261;
-  for (const ch of seed) state = Math.imul(state ^ ch.charCodeAt(0), 16777619);
-  const next = () => {
-    state ^= state << 13;
-    state ^= state >>> 17;
-    state ^= state << 5;
-    return (state >>> 0) / 4294967296;
-  };
-
-  const finders = [
-    [0, 0],
-    [0, size - 7],
-    [size - 7, 0],
-  ];
-  const inFinderZone = (r, c) =>
-    finders.some(([fr, fc]) => r >= fr - 1 && r <= fr + 7 && c >= fc - 1 && c <= fc + 7);
-
-  const matrix = Array.from({ length: size }, (_, r) =>
-    Array.from({ length: size }, (_, c) => (inFinderZone(r, c) ? false : next() > 0.5)),
+  if (!seed) return Array.from({ length: size }, () => Array(size).fill(false));
+  const qr = QRCode.create(seed.toUpperCase(), { errorCorrectionLevel: 'L' });
+  const n = qr.modules.size;
+  return Array.from({ length: n }, (_, r) =>
+    Array.from({ length: n }, (_, c) => Boolean(qr.modules.get(r, c))),
   );
-
-  for (const [fr, fc] of finders) {
-    for (let i = 0; i < 7; i += 1) {
-      for (let j = 0; j < 7; j += 1) {
-        const ring = i === 0 || i === 6 || j === 0 || j === 6;
-        const core = i >= 2 && i <= 4 && j >= 2 && j <= 4;
-        matrix[fr + i][fc + j] = ring || core;
-      }
-    }
-  }
-
-  for (let i = 8; i < size - 8; i += 1) {
-    matrix[6][i] = i % 2 === 0;
-    matrix[i][6] = i % 2 === 0;
-  }
-
-  return matrix;
 }
+export function formatKes(value) { return 'KSh ' + new Intl.NumberFormat('en-US').format(Math.round(value || 0)); }
